@@ -5,19 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   getToys();
 
   // add toy
-  let add_toy = document.querySelector(".add-toy-form")
+  let add_toy = document.querySelector(".add-toy-form");
   add_toy.addEventListener("submit", (e) => {
-  //  e.preventDefault();
-   let name = document.querySelectorAll(".input-text")[0].value;
-   let image = document.querySelectorAll(".input-text")[1].value;
+    //  e.preventDefault();
+    let name = document.querySelectorAll(".input-text")[0].value;
+    let image = document.querySelectorAll(".input-text")[1].value;
 
-   if(name === "" || image===""){
-     alert("Fill the fields")
-     return
-   }
-    post(name , image)
+    if (name === "" || image === "") {
+      alert("Fill the fields");
+      return;
+    }
+    post(name, image);
   });
-   
 
   // end
   const addBtn = document.querySelector("#new-toy-btn");
@@ -35,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // let id;
 
-
 function getToys() {
   fetch("http://localhost:3000/toys")
     .then(function (response) {
@@ -44,7 +42,6 @@ function getToys() {
     .then(function (data) {
       // console.log(data);
       for (let i = 0; i < data.length; i++) {
-
         const toy_collection = document.getElementById("toy-collection");
         const card = document.createElement("div");
         card.className = "card";
@@ -87,7 +84,7 @@ function getToys() {
 }
 
 function updateLikes(new_like, id) {
-  fetch("http://localhost:3000/toys/"+id, {
+  fetch("http://localhost:3000/toys/" + id, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -95,20 +92,16 @@ function updateLikes(new_like, id) {
     },
     body: JSON.stringify({
       id: id,
-      likes: new_like
+      likes: new_like,
     }),
   })
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-    });
-    
-    location.reload()
+    .then(function (data) {});
+
+  location.reload();
 }
-
-
-
 
 function post(name, image) {
   fetch("http://localhost:3000/toys/", {
@@ -119,8 +112,8 @@ function post(name, image) {
     },
     body: JSON.stringify({
       name: name,
-      image : image,
-      likes: 0
+      image: image,
+      likes: 0,
     }),
-  })
+  });
 }
