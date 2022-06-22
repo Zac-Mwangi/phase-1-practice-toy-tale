@@ -102,104 +102,12 @@ function updateLikes(new_like, id) {
       return response.json();
     })
     .then(function (data) {
-      for (let i = 0; i < data.length; i++) {
-
-        // console.log(data)
-
-        const toy_collection = document.getElementById("toy-collection");
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const h2 = document.createElement("h2");
-        h2.innerText = data[i].name;
-
-        const img = document.createElement("img");
-        img.className = "toy-avatar";
-        img.src = data[i].image;
-
-        const p = document.createElement("p");
-        p.innerText = data[i].likes + " Likes";
-
-        const buttonLike = document.createElement("button");
-        buttonLike.classList = "like-btn";
-        buttonLike.id = "btnLike";
-        buttonLike.innerText = "Like";
-
-        card.appendChild(h2);
-        card.appendChild(img);
-        card.appendChild(p);
-        card.appendChild(buttonLike);
-        toy_collection.appendChild(card);
-
-        buttonLike.addEventListener("click", (e) => {
-          e.preventDefault();
-          let id = data[i].id;
-          let likes = data[i].likes;
-          let new_like = likes + 1;
-          // alert(id)
-          updateLikes(new_like, id);
-        });
-      }
     });
+    
+    location.reload()
 }
 
 
-function updateLikes(new_like, id) {
-  fetch("http://localhost:3000/toys/"+id, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      id: id,
-      likes: new_like
-    }),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      for (let i = 0; i < data.length; i++) {
-
-        // console.log(data)
-
-        const toy_collection = document.getElementById("toy-collection");
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const h2 = document.createElement("h2");
-        h2.innerText = data[i].name;
-
-        const img = document.createElement("img");
-        img.className = "toy-avatar";
-        img.src = data[i].image;
-
-        const p = document.createElement("p");
-        p.innerText = data[i].likes + " Likes";
-
-        const buttonLike = document.createElement("button");
-        buttonLike.classList = "like-btn";
-        buttonLike.id = "btnLike";
-        buttonLike.innerText = "Like";
-
-        card.appendChild(h2);
-        card.appendChild(img);
-        card.appendChild(p);
-        card.appendChild(buttonLike);
-        toy_collection.appendChild(card);
-
-        buttonLike.addEventListener("click", (e) => {
-          e.preventDefault();
-          let id = data[i].id;
-          let likes = data[i].likes;
-          let new_like = likes + 1;
-          // alert(id)
-          updateLikes(new_like, id);
-        });
-      }
-    });
-}
 
 
 function post(name, image) {
